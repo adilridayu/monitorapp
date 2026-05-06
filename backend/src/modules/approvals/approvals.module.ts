@@ -1,0 +1,19 @@
+/**
+ * Approvals Module
+ * Manages approval workflows
+ */
+
+import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { ApprovalsService } from './approvals.service';
+import { ApprovalsController } from './approvals.controller';
+import { Approval } from './entities/approval.entity';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([Approval])],
+  controllers: [ApprovalsController],
+  providers: [ApprovalsService],
+  exports: [ApprovalsService, TypeOrmModule],
+})
+export class ApprovalsModule {}

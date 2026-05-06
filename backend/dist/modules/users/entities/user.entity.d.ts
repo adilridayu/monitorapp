@@ -1,0 +1,30 @@
+import { Role } from '../../roles/entities/role.entity';
+import { Warehouse } from '../../warehouses/entities/warehouse.entity';
+import { StockMovement } from '../../stock-movements/entities/stock-movement.entity';
+import { MonitoringLog } from '../../monitoring/entities/monitoring-log.entity';
+import { AiAlert } from '../../ai-alerts/entities/ai-alert.entity';
+import { Approval } from '../../approvals/entities/approval.entity';
+export declare class User {
+    id: string;
+    email: string;
+    password_hash: string;
+    full_name: string;
+    role_id: string;
+    role: Role;
+    warehouse_id: string;
+    warehouse: Warehouse;
+    is_active: boolean;
+    last_login: Date;
+    stockMovements: StockMovement[];
+    monitoringLogs: MonitoringLog[];
+    reviewedAlerts: AiAlert[];
+    approvals: Approval[];
+    created_at: Date;
+    updated_at: Date;
+    deleted_at: Date;
+    get isAdmin(): boolean;
+    get isManager(): boolean;
+    get isSupervisor(): boolean;
+    get isStaff(): boolean;
+    hasPermission(resource: string, action: string): boolean;
+}
