@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Warehouse Intelligence - Sistem monitoring gudang pintar dengan AI">
+    <title>Warehouse Intelligence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Login Page -->
+    <div id="login-page" class="page login-page active">
+        <div class="login-bg">
+            <div class="login-orb login-orb-1"></div>
+            <div class="login-orb login-orb-2"></div>
+            <div class="login-orb login-orb-3"></div>
+        </div>
+        <div class="login-container">
+            <div class="login-card glass-card">
+                <div class="login-logo">
+                    <div class="logo-icon-wrap">
+                        <span class="material-icons-round">warehouse</span>
+                    </div>
+                    <h1>Warehouse Intelligence</h1>
+                    <p>Sistem Monitoring Gudang</p>
+                </div>
+                <form id="login-form" class="login-form">
+                    <div class="form-group">
+                        <label for="login-email">Email</label>
+                        <div class="input-wrap">
+                            <span class="material-icons-round">email</span>
+                            <input type="email" id="login-email" placeholder="Masukkan email kamu" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Kata Sandi</label>
+                        <div class="input-wrap">
+                            <span class="material-icons-round">lock</span>
+                            <input type="password" id="login-password" placeholder="Masukkan kata sandi" required>
+                            <button type="button" class="toggle-pass" onclick="togglePassword()">
+                                <span class="material-icons-round">visibility</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-actions-row">
+                        <label class="remember-me"><input type="checkbox" checked> Ingat saya</label>
+                        <a href="#" class="forgot-link">Lupa Kata Sandi?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+                        <span class="btn-text">Masuk</span>
+                        <div class="btn-loader hidden">
+                            <div class="spinner-sm"></div>
+                        </div>
+                    </button>
+                </form>
+                <div class="demo-creds">
+                    <span class="material-icons-round">info</span>
+                    <div>
+                        <strong>Akun Demo</strong>
+                        <p>Email: demo@warehouse.com &bull; Password: demo123</p>
+                    </div>
+                </div>
+                <div class="login-footer">v1.0.0 &bull; Warehouse Intelligence &copy; 2026</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- App Shell -->
+    <div id="app-shell" class="app-shell hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <span class="material-icons-round">warehouse</span>
+                    <span class="sidebar-title">WI Monitor</span>
+                </div>
+                <button class="sidebar-close" onclick="toggleSidebar()">
+                    <span class="material-icons-round">close</span>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-page="dashboard" onclick="navigate('dashboard')">
+                    <span class="material-icons-round">dashboard</span><span>Beranda</span>
+                </a>
+                <a href="#" class="nav-item" data-page="stock" onclick="navigate('stock')">
+                    <span class="material-icons-round">inventory_2</span><span>Kelola Stok</span>
+                </a>
+                <a href="#" class="nav-item" data-page="alerts" onclick="navigate('alerts')">
+                    <span class="material-icons-round">notifications_active</span><span>Peringatan AI</span>
+                    <span class="nav-badge" id="alert-badge">3</span>
+                </a>
+                <a href="#" class="nav-item" data-page="monitoring" onclick="navigate('monitoring')">
+                    <span class="material-icons-round">monitor_heart</span><span>Pemantauan</span>
+                </a>
+                <a href="#" class="nav-item" data-page="profile" onclick="navigate('profile')">
+                    <span class="material-icons-round">person</span><span>Profil</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="sidebar-user">
+                    <div class="user-avatar">DU</div>
+                    <div class="user-info">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Admin</span>
+                    </div>
+                </div>
+                <button class="btn-icon" onclick="logout()" title="Keluar">
+                    <span class="material-icons-round">logout</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="topbar">
+                <button class="btn-icon hamburger" onclick="toggleSidebar()">
+                    <span class="material-icons-round">menu</span>
+                </button>
+                <h2 id="page-title">Beranda</h2>
+                <div class="topbar-actions">
+                    <div class="live-indicator"><span class="live-dot"></span> Langsung</div>
+                    <button class="btn-icon" onclick="toggleTheme()" id="theme-toggle" title="Ganti tema">
+                        <span class="material-icons-round">dark_mode</span>
+                    </button>
+                    <button class="btn-icon notif-btn" title="Notifikasi" onclick="showNotifications()">
+                        <span class="material-icons-round">notifications</span>
+                        <span class="notif-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <div class="content-area" id="content-area">
+                <!-- Pages injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
